@@ -7,7 +7,7 @@ Select a tab to reload every 3 minutes, thus preventing the timeout on the page 
 * Firefox 57.0 or later
 
 ## Version
-* Currently in the version 1.0
+* Currently in the version 1.0.1
 
 ## How Contribute
 Have a suggestion, doubt or encountered an error? Please open a new [issue](https://github.com/jhonatasrm/Tab-Refresh/issues).

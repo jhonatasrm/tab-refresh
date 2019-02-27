@@ -8,9 +8,10 @@ Using this add-on you can set the time in minutes for the refresh page, it is po
 
 ## Features
 * Set time to refresh tab in add-on preferences
+* Context menu
 
 ## Version
-* Currently in the version 1.1
+* Currently in the version 1.2
 
 ## How Contribute
 Have a suggestion, doubt or encountered an error? Please open a new [issue](https://github.com/jhonatasrm/tab-refresh/issues).

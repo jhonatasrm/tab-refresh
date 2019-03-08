@@ -23,7 +23,7 @@ I would be very happy if you can contribute, any value will surely be of great h
 
 Thank you so much for helping me continue developing this and other add-ons! <3
 
-You can donate via Paypal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jhonatasrm@gmail.com&lc=US&item_name=Donation+to+Tab+Refresh&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">here</a>. Thanks again! 
+You can donate via PayPal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jhonatasrm@gmail.com&lc=US&item_name=Donation+to+Tab+Refresh&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">here</a>. Thanks again! 
 
 
 ## Learn More 

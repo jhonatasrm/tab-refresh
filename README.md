@@ -1,4 +1,4 @@
-![Tab Refresh](tab_refresh.png)
+![Tab Refresh](/src/res/icons/icon@2x.png)
 # Tab Refresh [<img align="right" src="https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_2.png">](https://addons.mozilla.org/en-US/firefox/addon/Tab-Refresh/)
 
 Using this add-on you can set the time in minutes for the refresh page, it is possible to do this by adjusting in the preferences going in about:addons or by clicking on the gear in the top right corner. It works by refreshing the page every x minutes so that you don't be disconnected in the login timeout. This add-on will have more updates that will add new features, as requested in the reviews. Currently has the following features:

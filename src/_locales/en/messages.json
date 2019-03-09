@@ -1,0 +1,88 @@
+{
+  "extensionName": {
+    "message": "Tab Refresh",
+    "description": "Extension name."
+  },
+  "extensionDescription": {
+    "message": "Select a tab to reload every x minutes (you can set in the preferences, the default is 3 minutes), thus preventing the timeout on the page you are connected to."
+  },
+  "message_timer": {
+    "message":"Will reload the page at\n ",
+    "description": "Will reload the page at\n "
+  },
+  "message_timer_min": {
+    "message": "Reload this page every "
+  },
+  "min": {
+    "message": " minutes"
+  },
+  "min1": {
+    "message": " minute"
+  },
+  "about_title": {
+    "message": "About"
+  },
+  "preferences": {
+    "message": "Preferences"
+  },
+  "about": {
+    "message": "About Tab Refresh"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "note": {
+    "message": "Note: This extension is completely free! Please consider making a small donation or write an review at addons.mozilla.org. Thank you!"
+  },
+  "works": {
+    "message": "Using this add-on you can set the time in minutes for the refresh page, it is possible to do this by adjusting in the preferences going in about:addons or by clicking on the gear in the top right corner. It works by refreshing the page every x minutes so that you don't be disconnected in the login timeout. This add-on will have more updates that will add new features, as requested in the reviews. Currently has the following features:"
+  },
+  "aboutItem1": {
+    "message": "1. Set time to refresh tab in add-on preferences"
+  },
+  "aboutItem2": {
+    "message": "2. Context menu"
+  },
+  "bugs": {
+    "message": "If you find any bugs, have any suggestions or some ideas for this add-on: Please create a new issue."
+  },
+  "counter": {
+    "message": "Show countdown"
+  },
+  "contextMenu": {
+    "message": "Context menu"
+  },
+  "timer": {
+    "message": "Time to reload the page (minutes)"
+  },
+  "release0d": {
+    "message": "v1.0 (January 5, 2019)"
+  },
+  "release0": {
+    "message": "Release"
+  },
+  "release1d": {
+    "message": "v1.0.1 (January 6, 2019)"
+  },
+  "release1": {
+    "message": "Minor fixes"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "release2d": {
+    "message": "v1.1 (February 24, 2019)"
+  },
+  "release2": {
+    "message": "Option to set the timer to refresh the page\nMinor fixes"
+  },
+  "release3d": {
+    "message": "v1.2 (February 27, 2019)"
+  },
+  "release3": {
+    "message": "Context menu\nMinor fixes"
+  },
+  "version": {
+    "message": "Tab Refresh (v1.2)"
+  }
+}

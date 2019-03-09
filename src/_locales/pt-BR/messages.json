@@ -1,0 +1,88 @@
+{
+  "extensionName": {
+    "message": "Tab Refresh",
+    "description": "Extension name."
+  },
+  "extensionDescription": {
+    "message": "Selecione uma aba para recarregar a cada x minutos (você pode definir nas preferências, o padrão é 3 minutos), impedindo assim o tempo limite na página que você está conectado."
+  },
+  "message_timer": {
+    "message":"A página será recarregada ",
+    "description": "Will reload the page at "
+  },
+  "message_timer_min": {
+    "message": "Recarregue esta página a cada "
+  },
+  "min": {
+    "message": " minutos"
+  },
+  "min1": {
+    "message": " minuto"
+  },
+  "about_title": {
+    "message": "Sobre"
+  },
+  "preferences": {
+    "message": "Preferências"
+  },
+  "about": {
+    "message": "Sobre o Tab Refresh"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "bugs": {
+    "message": "Se você encontrar algum bug, tiver sugestões ou algumas idéias para esta extensão. Por favor, crie uma nova issue."
+  },
+  "works": {
+    "message": "Utilizando esta extensão você pode definir o tempo em minutos para a página recarregar, é possível fazer isso ajustando nas preferências indo em about:addons ou clicando na engrenagem no canto superior direito. Ela funciona recarregando a página a cada x minutos de forma que você não seja desconectado no tempo limite de login. Esta extensão terá mais updates que irão adicionar novas funcionalidades, conforme solicitado em avaliações da mesma. Atualmente ela possui os seguintes recursos:"
+  },
+  "aboutItem1": {
+    "message": "1. Definir quando atualizar a aba nas preferências da extensão"
+  },
+  "aboutItem2": {
+    "message": "2. Menu de contexto"
+  },
+  "counter": {
+    "message": "Mostrar contagem regressiva"
+  },
+  "note": {
+    "message": "Nota: Esta extensão é totalmente gratuita! Por favor, considere fazer uma pequena doação ou análise em addons.mozilla.org. Obrigado!"
+  },
+  "timer": {
+    "message": "Tempo para recarregar a página (minutos)"
+  },
+  "contextMenu": {
+    "message": "Menu de contexto"
+  },
+  "release0d": {
+    "message": "v1.0 (5 de Janeiro de 2019)"
+  },
+  "release0": {
+    "message": "Lançamento"
+  },
+  "release1d": {
+    "message": "v1.0.1 (6 de Janeiro de 2019)"
+  },
+  "changelog": {
+    "message": "Alterações"
+  },
+  "release1": {
+    "message": "Correções menores"
+  },
+  "release2d": {
+    "message": "v1.1 (24 de Fevereiro de 2019)"
+  },
+  "release2": {
+    "message": "Opção para definir o temporizador para atualizar a página\nCorreções menores"
+  },
+  "release3d": {
+    "message": "v1.2 (27 de Fevereiro de 2019)"
+  },
+  "release3": {
+    "message": "Menu de contexto\nCorreções menores"
+  },
+  "version": {
+    "message": "Tab Refresh (v1.2)"
+  }
+}

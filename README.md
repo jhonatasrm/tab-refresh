@@ -1,3 +1,9 @@
+[<img align="right" src="https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg)
+
 ![Tab Refresh](/src/res/icons/icon@2x.png)
 # Tab Refresh [<img align="right" src="https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_2.png">](https://addons.mozilla.org/en-US/firefox/addon/Tab-Refresh/)
 
@@ -9,9 +15,6 @@ Using this add-on you can set the time in minutes for the refresh page, it is po
 ## Features
 * Set time to refresh tab in add-on preferences
 * Context menu
-
-## Version
-* Currently in the version 1.2
 
 ## How Contribute
 Have a suggestion, doubt or encountered an error? Please open a new [issue](https://github.com/jhonatasrm/tab-refresh/issues).
@@ -25,6 +28,9 @@ Thank you so much for helping me continue developing this and other add-ons! <3
 
 You can donate via PayPal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jhonatasrm@gmail.com&lc=US&item_name=Donation+to+Tab+Refresh&no_note=0&cn=&curency_code=USD&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">here</a>. Thanks again! 
 
-
 ## Learn More 
 To learn more about webextensions development, see this [Mozilla developer Network documentation](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
+
+## License
+This repository is available under the [Mozilla Public License, version 2.0](https://github.com/jhonatasrm/tab-refresh/blob/master/LICENSE)
+

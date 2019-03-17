@@ -55,34 +55,7 @@
   "contextMenu": {
     "message": "Menu de contexto"
   },
-  "release0d": {
-    "message": "v1.0 (5 de Janeiro de 2019)"
-  },
-  "release0": {
-    "message": "Lançamento"
-  },
-  "release1d": {
-    "message": "v1.0.1 (6 de Janeiro de 2019)"
-  },
-  "changelog": {
-    "message": "Alterações"
-  },
-  "release1": {
-    "message": "Correções menores"
-  },
-  "release2d": {
-    "message": "v1.1 (24 de Fevereiro de 2019)"
-  },
-  "release2": {
-    "message": "Opção para definir o temporizador para atualizar a página\nCorreções menores"
-  },
-  "release3d": {
-    "message": "v1.2 (27 de Fevereiro de 2019)"
-  },
-  "release3": {
-    "message": "Menu de contexto\nCorreções menores"
-  },
   "version": {
-    "message": "Tab Refresh (v1.2)"
+    "message": "Tab Refresh (v1.3)"
   }
 }

@@ -6,7 +6,7 @@ var date;
 var refreshTab;
 var activate;
 var reloadMinutes;
-
+var showCounter = true;
 var iconActive = "../res/icons/refresh_tab_on_32.png";
 var iconInactive = "../res/icons/refresh_tab_32.png";
 var iconLocalOff = "../res/icons/refresh_tab_off_32.png";
@@ -28,6 +28,11 @@ if(localStorage.getItem("timer") == null){
     browser.browserAction.setTitle({title: timerUpdateEveryXmin + reloadMinutes + timerMinutes});
 }
 
+window.onload = function(){
+    browser.browserAction.setIcon({'path': iconInactive, 'tabId': tab.id});
+    browser.browserAction.setTitle({'title': timerUpdateEveryXmin, 'tabId': tab.id});
+}
+
 // start about.html
 function handleInstalled(details) {
     browser.tabs.create({
@@ -42,6 +47,9 @@ browser.browserAction.onClicked.addListener(startTimer);
 
 // onUpdate Tab
 browser.tabs.onUpdated.addListener(verifyPage);
+
+// setup badge background color
+browser.browserAction.setBadgeBackgroundColor({'color': '#14C7CD'});
 
 function changeHoverText(tab, reloadMinutes) {
 var currentDate = new Date();
@@ -78,6 +86,7 @@ if (reloadTab == 0){
     alreadyAccessed = false;
     activate = true;
     reloadTab = 0;
+        timerCount(tab, showCounter);
 }else{
     browser.browserAction.setIcon({'path': iconInactive, 'tabId': tab.id});
 
@@ -90,6 +99,7 @@ if (reloadTab == 0){
 alreadyAccessed = true;
 activate = false;
 reloadTab = 1;
+        timerCount(tab, showCounter);
 }
 }
 
@@ -275,3 +285,28 @@ browser.menus.onClicked.addListener((info, tab) => {
     break;
   }
 });
+
+function timerCount(tab, showCounter){
+
+        if(localStorage.getItem("timer") == null){
+            sec = 180;
+            var secValueRecover = sec;
+        }else{
+            sec = localStorage.getItem("timer");
+            sec = sec * 60;
+            var secValueRecover = sec;
+        }
+        if(localStorage.getItem('counter') == "enabled"){
+            if(alreadyAccessed == false){
+                setInterval(function() {
+                    browser.browserAction.setBadgeText({'text': sec.toString(), 'tabId': tab.id});
+                    sec = sec - 1;
+                    if (sec == 00){
+                        sec = secValueRecover;
+                        }
+                    }, 1000);
+            }else{
+                 browser.browserAction.setBadgeText({'text': "", 'tabId': tab.id});
+            }
+        }
+}

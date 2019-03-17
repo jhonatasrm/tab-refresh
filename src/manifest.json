@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "__MSG_extensionName__",
 	"description": "__MSG_extensionDescription__",
-	"version": "1.2",
+	"version": "1.3",
 	"homepage_url": "https://github.com/jhonatasrm/tab-refresh",
 	"default_locale": "en",
 	"author": "Jhonatas Rodrigues",

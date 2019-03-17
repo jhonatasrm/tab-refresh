@@ -1,8 +1,9 @@
-[<img align="right" src="https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg)
 [<img align="right" src="https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg)
+
 
 ![Tab Refresh](/src/res/icons/icon@2x.png)
 # Tab Refresh <a href='https://ko-fi.com/S6S5S3WU' target='_blank'><img align="right" height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com'/></a>[<img align="right" src="https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_2.png">](https://addons.mozilla.org/en-US/firefox/addon/Tab-Refresh/)
@@ -26,3 +27,4 @@ To learn more about webextensions development, see this [Mozilla developer Netwo
 
 ## License
 This repository is available under the [Mozilla Public License, version 2.0](https://github.com/jhonatasrm/tab-refresh/blob/master/LICENSE)
+

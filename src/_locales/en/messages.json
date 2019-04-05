@@ -32,7 +32,7 @@
     "message": "Settings"
   },
   "note": {
-    "message": "Note: This extension is completely free! Please consider making a small donation or write an review at addons.mozilla.org. Thank you!"
+    "message": "Note: This Add-on is completely free! Please consider making a small donation or write an review at addons.mozilla.org. Thank you!"
   },
   "works": {
     "message": "Using this add-on you can set the time in minutes for the refresh page, it is possible to do this by adjusting in the preferences going in about:addons or by clicking on the gear in the top right corner. It works by refreshing the page every x minutes so that you don't be disconnected in the login timeout. This add-on will have more updates that will add new features, as requested in the reviews. Currently has the following features:"

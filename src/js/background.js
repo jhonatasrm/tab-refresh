@@ -19,6 +19,7 @@ var timerMinute = browser.i18n.getMessage("min1");
 
 if(localStorage.getItem("timer") == null){
     reloadMinutes = 3;
+    localStorage.setItem("timer", 3);
     browser.browserAction.setTitle({title: timerUpdateEveryXmin + reloadMinutes + timerMinutes});
 }else if(localStorage.getItem("timer") == 1 ){
     reloadMinutes = localStorage.getItem("timer");
@@ -107,6 +108,7 @@ function startTimer(tab) {
 
 if(localStorage.getItem("timer") == null){
     reloadMinutes = 3;
+    localStorage.setItem("timer", 3);
 }else{
     reloadMinutes = localStorage.getItem("timer");
     }
@@ -189,7 +191,7 @@ browser.tabs.query({active: true, windowId: browser.windows.WINDOW_ID_CURRENT})
             browser.browserAction.setIcon({path: iconActive});
             browser.browserAction.setTitle({'title': timerUpdate + date, 'tabId': tab.id});
         }else if(alreadyAccessed == false && getTabId == tab.id){
-            browser.browserAction.setIcon({path: iconInctive});
+            browser.browserAction.setIcon({path: iconInactive});
             if(reloadMinutes == 1){
                 browser.browserAction.setTitle({'title': timerUpdateEveryXmin + reloadMinutes + timerMinute, 'tabId': tab.id});
             }else{
@@ -217,37 +219,35 @@ function contextMenuFunction(){
             contexts: ["selection"]
         }, onCreated);
 
-
         browser.menus.create({
             id: "1",
             title: "1 min",
             contexts: ["all"],
-         }, onCreated);
+        }, onCreated);
 
         browser.menus.create({
             id: "2",
             title: "2 min",
             contexts: ["all"],
-            }, onCreated);
+        }, onCreated);
 
         browser.menus.create({
             id: "3",
             title: "3 min",
             contexts: ["all"],
-           }, onCreated);
+        }, onCreated);
 
         browser.menus.create({
             id: "5",
             title: "5 min",
             contexts: ["all"],
-            checked: false,
-           }, onCreated);
+        }, onCreated);
 
         browser.menus.create({
             id: "10",
             title: "10 min",
             contexts: ["all"],
-           }, onCreated);
+        }, onCreated);
 
     }else{
         browser.menus.remove("tab-refresh");
@@ -287,7 +287,6 @@ browser.menus.onClicked.addListener((info, tab) => {
 });
 
 function timerCount(tab, showCounter){
-
         if(localStorage.getItem("timer") == null){
             sec = 180;
             var secValueRecover = sec;

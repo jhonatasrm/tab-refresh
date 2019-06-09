@@ -17,6 +17,9 @@ var timerUpdateEveryXmin = browser.i18n.getMessage("message_timer_min");
 var timerMinutes = browser.i18n.getMessage("min");
 var timerMinute = browser.i18n.getMessage("min1");
 
+// load Context menu preference
+contextMenuFunction();
+
 if(localStorage.getItem("timer") == null){
     reloadMinutes = 3;
     localStorage.setItem("timer", 3);
@@ -212,7 +215,7 @@ function onCreated() {
 }
 
 function contextMenuFunction(){
- if(localStorage.getItem('contextMenu') == 'True'){
+ if(localStorage.getItem('contextMenu') == 'true'){
         browser.menus.create({
             id: "tab-refresh",
             title: "Tab Refresh",

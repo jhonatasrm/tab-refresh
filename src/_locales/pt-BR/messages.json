@@ -28,11 +28,8 @@
   "about": {
     "message": "Sobre o Tab Refresh"
   },
-  "settings": {
-    "message": "Configurações"
-  },
   "bugs": {
-    "message": "Se você encontrar algum bug, tiver sugestões ou algumas idéias para esta extensão. Por favor, crie uma nova issue."
+    "message": "Se você encontrar algum bug, tiver sugestões ou algumas idéias para esta extensão. Por favor, crie uma nova <a href='https://github.com/jhonatasrm/tab-refresh/issues'>issue</a>."
   },
   "works": {
     "message": "Utilizando esta extensão você pode definir o tempo em minutos para a página recarregar, é possível fazer isso ajustando nas preferências indo em about:addons ou clicando na engrenagem no canto superior direito. Ela funciona recarregando a página a cada x minutos de forma que você não seja desconectado no tempo limite de login. Esta extensão terá mais updates que irão adicionar novas funcionalidades, conforme solicitado em avaliações da mesma. Atualmente ela possui os seguintes recursos:"
@@ -47,7 +44,7 @@
     "message": "Mostrar contagem regressiva"
   },
   "note": {
-    "message": "Nota: Esta extensão é totalmente gratuita! Por favor, considere fazer uma pequena doação ou análise em addons.mozilla.org. Obrigado!"
+    "message": "Nota: Esta extensão é totalmente gratuita! Por favor, considere fazer uma pequena <a href='https://ko-fi.com/S6S5S3WU'>doação</a> ou análise em <a href='https://addons.mozilla.org/pt-BR/firefox/addon/tab-refresh/'>addons.mozilla.org</a>. Obrigado!"
   },
   "timer": {
     "message": "Tempo para recarregar a página (minutos)"
@@ -55,7 +52,13 @@
   "contextMenu": {
     "message": "Menu de contexto"
   },
+  "description_contextmenu": {
+    "message": "Permite ou não o Menu de contexto"
+  },
+  "description_timer": {
+    "message": "Define o tempo para recarregar a página"
+  },
   "version": {
-    "message": "Tab Refresh (v1.3)"
+    "message": "Tab Refresh (v1.4)"
   }
 }

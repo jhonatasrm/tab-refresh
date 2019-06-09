@@ -29,8 +29,9 @@
     </header>
     <fieldset class="col-md-12">
         <div>
-            <strong id="settings" data-i18n="settings"></strong>
+            <h4><strong id="preferences" data-i18n="preferences"></strong>
             <a href="../html/about.html" title="About" ><img src="../res/icons/about.png" style="float:right;margin-right:-5px;"></a>
+            </h4>
         </div>
         <!--<div class="col-md-12 col-sm-12" style="margin-top:20px;">-->
         <!--<label data-i18n="counter"></label>-->
@@ -40,11 +41,15 @@
         <!--<input type="radio" name="counter" value="enabled">On</label>-->
         <!--</div>-->
         <div class="col-md-12 col-sm-12" style="margin-top:20px;" ><br>
-            <label data-i18n="timer"></label>
+            <label data-i18n="timer">
+                <small class="form-text text-muted" data-i18n="description_timer" style="margin-top:-2px;"></small>
+            </label>
             <input class="btn btn-outline-primary" id="timer" type="number" name="timer" value="3" min="1" max="15" style="width:200px;float:right;margin-right:14px;">
         </div>
-        <div class="col-md-12 col-sm-12" style="margin-top:40px;">
-            <label data-i18n="contextMenu"></label>
+        <div class="col-md-12 col-sm-12" style="margin-top:20px;">
+            <label data-i18n="contextMenu">
+                <small class="form-text text-muted" data-i18n="description_contextmenu" style="margin-top:-2px;"></small>
+            </label>
             <label class="btn btn-outline-primary " style="width:150px;float:right;">
                 <input type="radio" name="contextMenu" value="False" checked="checked">Off</label>
             <label class="btn btn-outline-primary " style="width:150px;float:right;">

@@ -1,8 +1,8 @@
-[<img align="right" src="https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg)
-[<img align="right" src="https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg">](https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg)
+[<img align="right" src="https://img.shields.io/github/issues/jhonatasrm/tab-refresh.svg">](https://github.com/jhonatasrm/tab-refresh/issues)
+[<img align="right" src="https://img.shields.io/github/license/jhonatasrm/tab-refresh.svg">](https://github.com/jhonatasrm/tab-refresh/blob/master/LICENSE)
+[<img align="right" src="https://img.shields.io/github/forks/jhonatasrm/tab-refresh.svg">]()
+[<img align="right" src="https://img.shields.io/github/stars/jhonatasrm/tab-refresh.svg">]()
+[<img align="right" src="https://img.shields.io/github/release/jhonatasrm/tab-refresh.svg">](https://github.com/jhonatasrm/tab-refresh/releases)
 
 
 ![Tab Refresh](/src/res/icons/icon@2x.png)

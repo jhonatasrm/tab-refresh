@@ -23,6 +23,8 @@ This add-on will have more updates that will add new features, as requested in t
 ## How Contribute
 Have a suggestion, doubt or encountered an error? Please open a new [issue](https://github.com/jhonatasrm/tab-refresh/issues)
 
+Contributions are welcome, feel free to submit a pull :)
+
 ## Learn More 
 To learn more about webextensions development, see this [Mozilla developer Network documentation](https://developer.mozilla.org/en-US/Add-ons/WebExtensions)
 

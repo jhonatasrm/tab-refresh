@@ -37,15 +37,6 @@ window.onload = function(){
     browser.browserAction.setTitle({'title': timerUpdateEveryXmin, 'tabId': tab.id});
 }
 
-// start about.html
-function handleInstalled(details) {
-    browser.tabs.create({
-    url: "../html/about.html"
-    });
-}
-
-browser.runtime.onInstalled.addListener(handleInstalled);
-
 //start
 browser.browserAction.onClicked.addListener(startTimer);
 

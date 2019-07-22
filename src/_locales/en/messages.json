@@ -29,7 +29,7 @@
     "message": "About Tab Refresh"
   },
   "note": {
-    "message": "Note: This Add-on is completely free! Please consider making a small <a href='https://ko-fi.com/S6S5S3WU'>donation</a> or write an review at <a href='https://addons.mozilla.org/en-US/firefox/addon/tab-refresh/'>addons.mozilla.org</a>. Thank you!"
+    "message": "Note: This Add-on is completely free! Please consider making a small donation or write an review at addons.mozilla.org. Thank you!"
   },
   "works": {
     "message": "Using this Add-on you can set the time in minutes for the refresh page, it is possible to do this by adjusting in the preferences going in about:addons or by clicking on the gear in the top right corner. It works by refreshing the page every x minutes so that you don't be disconnected in the login timeout. This Add-on will have more updates that will add new features, as requested in the reviews. Currently has the following features:"
@@ -41,7 +41,7 @@
     "message": "2. Context menu"
   },
   "bugs": {
-    "message": "If you find any bugs, have any suggestions or some ideas for this Add-on: Please create a new <a href='https://github.com/jhonatasrm/tab-refresh/issues'>issue</a>."
+    "message": "If you find any bugs, have any suggestions or some ideas for this Add-on: Please create a new issue."
   },
   "counter": {
     "message": "Show countdown"
@@ -59,6 +59,6 @@
     "message": "Sets the time to refresh the page"
   },
   "version": {
-    "message": "Tab Refresh (v1.4)"
+    "message": "Tab Refresh (v1.4.1)"
   }
 }

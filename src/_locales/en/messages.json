@@ -57,8 +57,5 @@
   },
   "description_timer": {
     "message": "Sets the time to refresh the page"
-  },
-  "version": {
-    "message": "Tab Refresh (v1.4.1)"
   }
 }

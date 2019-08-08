@@ -57,8 +57,5 @@
   },
   "description_timer": {
     "message": "Define o tempo para recarregar a página"
-  },
-  "version": {
-    "message": "Tab Refresh (v1.4.1)"
   }
 }

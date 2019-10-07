@@ -4,14 +4,14 @@
     "description": "Extension name."
   },
   "extensionDescription": {
-    "message": "Select a tab to reload every x minutes (you can set in the preferences, the default is 3 minutes), thus preventing the timeout on the page you are connected to."
+    "message": "Select a tab to refresh every x minutes (you can set in the preferences, the default is 3 minutes), thus preventing the timeout on the page you are connected to."
   },
   "message_timer": {
-    "message":"Will reload the page at\n ",
-    "description": "Will reload the page at\n "
+    "message":"Will refresh the page at\n ",
+    "description": "Will refresh the page at\n "
   },
   "message_timer_min": {
-    "message": "Reload this page every "
+    "message": "Refresh this page every "
   },
   "min": {
     "message": " minutes"
@@ -40,6 +40,9 @@
   "aboutItem2": {
     "message": "2. Context menu"
   },
+  "aboutItem3": {
+    "message": "3. Does not refresh the page you are using"
+  },
   "bugs": {
     "message": "If you find any bugs, have any suggestions or some ideas for this Add-on: Please create a new issue."
   },
@@ -50,7 +53,13 @@
     "message": "Context menu"
   },
   "timer": {
-    "message": "Time to reload the page (minutes)"
+    "message": "Time to refresh the page (minutes)"
+  },
+  "update_page": {
+    "message": "Do not refresh the tab if you are using"
+  },
+  "description_update_page": {
+    "message": "Do not refresh the tab if it is being used"
   },
   "description_contextmenu": {
     "message": "Allow or not the Context menu"

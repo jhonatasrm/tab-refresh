@@ -40,6 +40,9 @@
   "aboutItem2": {
     "message": "2. Menu de contexto"
   },
+  "aboutItem3": {
+    "message": "3. Não recarrega a página que você está usando"
+  },
   "counter": {
     "message": "Mostrar contagem regressiva"
   },
@@ -48,6 +51,12 @@
   },
   "timer": {
     "message": "Tempo para recarregar a página (minutos)"
+  },
+  "update_page": {
+    "message": "Não recarregar a aba se estiver a utilizando"
+  },
+  "description_update_page": {
+    "message": "Não recarrega a aba caso esteja sendo utilizada"
   },
   "contextMenu": {
     "message": "Menu de contexto"

@@ -46,3 +46,17 @@ $('input[name="contextMenu"]').on('change', function(){
     backgroundPage.contextMenuFunction();
   });
 });
+
+ $(document).ready(function(){
+  var radios = document.getElementsByName("updatePage");
+  var val = localStorage.getItem('updatePage');
+  for(var i=0;i<radios.length;i++){
+    if(radios[i].value == val){
+      radios[i].checked = true;
+    }
+  }
+$('input[name="updatePage"]').on('change', function(){
+    localStorage.setItem('updatePage', $(this).val());
+    backgroundPage.updatePageFunction();
+  });
+});

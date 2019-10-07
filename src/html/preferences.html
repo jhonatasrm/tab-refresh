@@ -42,18 +42,27 @@
         <!--</div>-->
         <div class="col-md-12 col-sm-12" style="margin-top:20px;" ><br>
             <label data-i18n="timer">
-                <small class="form-text text-muted" data-i18n="description_timer" style="margin-top:-2px;"></small>
             </label>
-            <input class="btn btn-outline-primary" id="timer" type="number" name="timer" value="3" min="1" max="15" style="width:200px;float:right;margin-right:14px;">
+            <input class="btn btn-outline-primary" id="timer" type="number" name="timer" value="3" min="1" max="15" style="width:200px;float:right;margin-right:14px;margin-top:-2px;">
+            <small class="form-text text-muted" data-i18n="description_timer" style="margin-top:-10px;"></small>
         </div>
         <div class="col-md-12 col-sm-12" style="margin-top:20px;">
             <label data-i18n="contextMenu">
-                <small class="form-text text-muted" data-i18n="description_contextmenu" style="margin-top:-2px;"></small>
             </label>
-            <label class="btn btn-outline-primary " style="width:150px;float:right;">
+            <label class="btn btn-outline-primary " style="width:200px;float:right; margin-top:2px;">
                 <input type="radio" name="contextMenu" value="false" checked="checked">Off</label>
-            <label class="btn btn-outline-primary " style="width:150px;float:right;">
+            <label class="btn btn-outline-primary " style="width:200px;float:right;margin-top:2px;">
                 <input type="radio" name="contextMenu" value="true">On</label>
+            <small class="form-text text-muted" data-i18n="description_contextmenu" style="margin-top:-10px;"></small>
+        </div>
+         <div class="col-md-12 col-sm-12" style="margin-top:20px;">
+            <label data-i18n="update_page">
+            </label>
+            <label class="btn btn-outline-primary" style="width:200px;float:right;">
+                <input type="radio" name="updatePage" value="false">Off</label>
+            <label class="btn btn-outline-primary" style="width:200px;float:right;">
+                <input type="radio" name="updatePage" value="true" checked="checked">On</label>
+             <small class="form-text text-muted" data-i18n="description_update_page" style="margin-top:-10px;"></small>
         </div>
     </fieldset>
 </main>

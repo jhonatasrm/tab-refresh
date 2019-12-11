@@ -427,8 +427,21 @@ function verifyPage(tab) {
         }
         if(reloadNotActivated == false){
             // console.log("Add-on not activated");
+            if (reloadMinutes == 1) {
+                browser.browserAction.setTitle({
+                    'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
+                    'tabId': tab.id
+                });
+            } else {
+                browser.browserAction.setTitle({
+                    'title': timerUpdateEveryXmin + reloadMinutes + timerMinutes,
+                    'tabId': tab.id
+                });
+            }
+    
+            alreadyAccessed = false;
+            activate = true;
             reloadTab = 0;
-            changeHoverText(tab, reloadMinutes);
         }
 }
 

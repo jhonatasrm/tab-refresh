@@ -1,26 +1,34 @@
-var reloadTab = 0;
-var sec;
-var alreadyAccessed = false;
-var getTabId;
-var date;
-var refreshTab;
-var activate;
-var verifyState = true;
-var reloadMinutes;
-var showCounter = true;
-var iconActive = "../res/icons/refresh_tab_on_32.png";
-var iconInactive = "../res/icons/refresh_tab_32.png";
-var iconLocalOff = "../res/icons/refresh_tab_off_32.png";
+let reloadTab = 0;
+let sec;
+let alreadyAccessed = false;
+let getTabId;
+let date;
+let refreshTab;
+let activate;
+let verifyState = true;
+let reloadMinutes;
+let verifyTabID;
+let showCounter = true;
+let secValueRecover;
+let iconActive = "../res/icons/refresh_tab_on_32.png";
+let iconInactive = "../res/icons/refresh_tab_32.png";
+let iconLocalOff = "../res/icons/refresh_tab_off_32.png";
 
 // i18n
-var timerUpdate = browser.i18n.getMessage("message_timer");
-var timerUpdateEveryXmin = browser.i18n.getMessage("message_timer_min");
-var timerMinutes = browser.i18n.getMessage("min");
-var timerMinute = browser.i18n.getMessage("min1");
+let timerUpdate = browser.i18n.getMessage("message_timer");
+let timerUpdateEveryXmin = browser.i18n.getMessage("message_timer_min");
+let timerMinutes = browser.i18n.getMessage("min");
+let timerMinute = browser.i18n.getMessage("min1");
 
 // load Context menu preference
 contextMenuFunction();
 updatePageFunction();
+
+// tabs
+let verifyTab = [];
+let storedTabs = localStorage.getItem("verifyTab");
+verifyTab = storedTabs ? JSON.parse(storedTabs) : [];
+let tabOpened = [];
 
 if (localStorage.getItem("timer") == null) {
     reloadMinutes = 3;
@@ -40,18 +48,10 @@ if (localStorage.getItem("timer") == null) {
     });
 }
 
-window.onload = function() {
-    browser.browserAction.setIcon({
-        'path': iconInactive,
-        'tabId': tab.id
-    });
-    browser.browserAction.setTitle({
-        'title': timerUpdateEveryXmin,
-        'tabId': tab.id
-    });
-}
+// tab closed
+browser.tabs.onRemoved.addListener(handleRemovedTab);
 
-//start
+// start
 browser.browserAction.onClicked.addListener(startTimer);
 
 // onUpdate Tab
@@ -63,10 +63,10 @@ browser.browserAction.setBadgeBackgroundColor({
 });
 
 function changeHoverText(tab, reloadMinutes) {
-    var currentDate = new Date();
-    var hours = currentDate.getHours();
-    var secs = currentDate.getSeconds();
-    var minutes = currentDate.getMinutes() + parseInt(reloadMinutes);
+    let currentDate = new Date();
+    let hours = currentDate.getHours();
+    let secs = currentDate.getSeconds();
+    let minutes = currentDate.getMinutes() + parseInt(reloadMinutes);
 
     if (minutes > 59) {
         hours = hours + 1;
@@ -163,8 +163,19 @@ function startTimer(tab) {
             'path': iconInactive,
             'tabId': tab.id
         });
+        // remove tab.id from array
+        let removeFromArray = JSON.parse(localStorage.getItem("verifyTab"));
 
-        if (reloadMinutes == 1) {
+        if(removeFromArray != null && removeFromArray != "undefined" && removeFromArray > 0){
+            for (let i = 0; i <= removeFromArray.length; i++) {
+                if(removeFromArray[i] === tab.id){
+                    removeFromArray.splice(i, 1);
+                    localStorage.setItem("verifyTab", JSON.stringify(removeFromArray));
+                }
+            }
+            verifyTab = removeFromArray;
+        }
+        if (reloadMinutes == 1) { 
             browser.browserAction.setTitle({
                 'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
                 'tabId': tab.id
@@ -178,56 +189,101 @@ function startTimer(tab) {
         activate = true;
         reloadTab = 0;
         return;
+    } else {
+        verifyTab.push(verifyTabID);
+        localStorage.setItem("verifyTab", JSON.stringify(verifyTab));
     }
-        changeHoverText(tab, reloadMinutes);
+
+    changeHoverText(tab, reloadMinutes);
 
         reloadTab = setInterval(function() {
             updatePageFunction();
             if (activate == true) {
-                 verify(tab);
-                 if(updatePage == false){
-                         console.log("Refresh tab option saved!");
-                         browser.tabs.reload(tab.id, {'bypassCache': true});
-                         reloadTab = 0;
-                         browser.browserAction.setIcon({path: iconActive});
-                         browser.browserAction.setTitle({
-                            'title': timerUpdate + date,
-                            'tabId': tab.id
-                         });
-                         changeHoverText(tab, reloadMinutes);
-                 }else if (updatePage == true){
-                     if(!verifyState){
-                         console.log("Is not in the tab to refresh!");
-                         browser.tabs.reload(tab.id, {'bypassCache': true});
-                         reloadTab = 0;
-                         browser.browserAction.setIcon({path: iconActive});
-                         browser.browserAction.setTitle({
-                            'title': timerUpdate + date,
-                            'tabId': tab.id
-                         });
-                         changeHoverText(tab, reloadMinutes);
-                     }else {
-                        console.log("Is in the tab to refresh!");
+                let canReload = 1;
+                if (updatePage == true){
+                    if(verifyTab.length > 0){
+                        for (let i = 0; i <= verifyTab.length; i++) {
+                            if(verifyTab[i] == verifyTabID){
+                                    canReload = 0;
+                                    // console.log(">> Tab saved ", verifyTab[i], " current tab id ", verifyTabID);
+                            }
+                        }
+                    }
+                    
+                    if (canReload == 1) {
+                            let existTabInArray = false;
+                            let tabsClicked = JSON.parse(localStorage.getItem("verifyTab"));
+                            let tabsVisited = JSON.parse(localStorage.getItem("tabsStored"));
+                            if(tabsClicked.length > 0){
+                                for(let i = 0; i <= tabsClicked.length; i++){
+                                    for(let j = 0; j <= tabsVisited.length; j++){
+                                        // console.log("Clicked ", tabsClicked[i], " ==  Visited ", tabsVisited[j]);
+                                        if(tabsClicked[i] === tabsVisited[j]){
+                                            existTabInArray = true;
+                                        }
+                                    }
+                                }
+                                if(existTabInArray == true){
+                                    console.log("(Reload) The tab exist in the Array ", tab.id);
+                                    reloadTab = 0;
+                                    browser.tabs.reload(tab.id, {'bypassCache': true});
+                                    browser.browserAction.setIcon({path: iconActive});
+                                    browser.browserAction.setTitle({
+                                        'title': timerUpdate + date,
+                                        'tabId': tab.id
+                                    });
+                                    changeHoverText(tab, reloadMinutes);
+                                } else {
+                                    console.log("(Not Reload) The tab doesn't exist in Array");
+                                    reloadTab = 0;
+                                    changeHoverText(tab, reloadMinutes);
+                                }
+                            } else {
+                                console.log("(Not Reload) In the tab ", tab.id);
+                                reloadTab = 0;
+                                browser.browserAction.setIcon({path: iconInactive});
+                                browser.browserAction.setTitle({
+                                    'title': timerUpdate + date,
+                                    'tabId': tab.id
+                                });
+                                changeHoverText(tab, reloadMinutes);
+                            }
+                        
+                    } else {
+                        console.log("(Not Reload) Can't reload the tab because is in use ", tab.id);
                         reloadTab = 0;
-                        browser.browserAction.setIcon({path: iconActive});
-                         browser.browserAction.setTitle({
+                        browser.browserAction.setIcon({path: iconInactive});
+                        browser.browserAction.setTitle({
                             'title': timerUpdate + date,
                             'tabId': tab.id
-                         });
+                        });
                         changeHoverText(tab, reloadMinutes);
-                     }
+                    }
+                }else {
+                    console.log("(Reload) Can reload any tab", tab.id);
+                    reloadTab = 0;
+                    browser.tabs.reload(tab.id, {'bypassCache': true});
+                    browser.browserAction.setIcon({path: iconActive});
+                    browser.browserAction.setTitle({
+                        'title': timerUpdate + date,
+                        'tabId': tab.id
+                    });
+                    changeHoverText(tab, reloadMinutes);
                 }
             }
         }, reloadMinutes * 60 * 1000);
 }
 
 function verifyPage(tab) {
+
     browser.tabs.query({
             active: true,
             windowId: browser.windows.WINDOW_ID_CURRENT
         })
         .then(tabs => browser.tabs.get(tabs[0].id))
         .then(tab => {
+            verifyTabID = tab.id;
+            // console.log(verifyTabID);
             if (tab.url == "about:preferences") {
                 browser.browserAction.setIcon({
                     path: iconLocalOff
@@ -329,6 +385,51 @@ function verifyPage(tab) {
                 });
             }
         });
+        
+         // tabs opened
+        var tabsStored = localStorage.getItem("tabsStored");
+        tabOpened = tabsStored ? JSON.parse(tabsStored) : [];
+        
+        let alreadyExist = false;
+        let removeAlreadyExist = JSON.parse(localStorage.getItem("tabsStored"));;
+        if(tabOpened.length != 0){
+            for(let r = 0; r <= tabOpened.length; r++){
+                if(tabOpened[r] == verifyTabID){
+                    alreadyExist = true;
+                }
+                
+                if(removeAlreadyExist[r] == "undefined" || removeAlreadyExist[r] == null){
+                    removeAlreadyExist.splice(r, 1);
+                    localStorage.setItem("tabsStored", JSON.stringify(removeAlreadyExist));
+                }
+            }
+        }else {
+            tabOpened.push(verifyTabID);
+            localStorage.setItem("tabsStored", JSON.stringify(tabOpened));
+        }
+    
+        if(alreadyExist == false){
+            tabOpened.push(verifyTabID);
+            localStorage.setItem("tabsStored", JSON.stringify(tabOpened));
+        }
+        tabOpened = localStorage.getItem("tabsStored");
+        // console.log("Tabs clicked to reload ", verifyTab);
+        // console.log("All open tabs already captured ", tabOpened);
+
+        // verify if is checked to reload
+        let reloadNotActivated = false;
+        if(verifyTab.length > 0){
+            for (let i = 0; i <= verifyTab.length; i++) {
+                if(verifyTab[i] == verifyTabID){
+                    reloadNotActivated = true;
+                }
+            }
+        }
+        if(reloadNotActivated == false){
+            // console.log("Add-on not activated");
+            reloadTab = 0;
+            changeHoverText(tab, reloadMinutes);
+        }
 }
 
 function onCreated() {
@@ -418,11 +519,11 @@ function timerCount(tab, showCounter) {
     getTabId = tab.id;
     if (localStorage.getItem("timer") == null) {
         sec = 180;
-        var secValueRecover = sec;
+        secValueRecover = sec;
     } else {
         sec = localStorage.getItem("timer");
         sec = sec * 60;
-        var secValueRecover = sec;
+        secValueRecover = sec;
     }
     if (localStorage.getItem('counter') == "enabled") {
         if (alreadyAccessed == false) {
@@ -453,7 +554,6 @@ function updatePageFunction(){
     }else {
         updatePage = false;
     }
-    console.log(updatePage);
 }
 
 function verify(tab){
@@ -469,4 +569,21 @@ function verify(tab){
                 verifyState = false;
             }
     });
+}
+
+// remove tab closed from the array
+function handleRemovedTab(tabId) {
+    // console.log("Tab: " + tabId + " is closing");
+    let removeFromArray = JSON.parse(localStorage.getItem("verifyTab"));
+    if(removeFromArray > 0){
+        for (let i = 0; i <= removeFromArray.length; i++) {
+            if(removeFromArray[i] === tabId){
+                removeFromArray.splice(i, 1);
+                localStorage.setItem("verifyTab", JSON.stringify(removeFromArray));
+            }
+        }
+    }else {
+        // console.log("The Array is empty");
+    }
+    verifyTab = localStorage.getItem("verifyTab");
 }

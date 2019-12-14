@@ -117,7 +117,6 @@ function changeHoverText(tab, reloadMinutes) {
 
         alreadyAccessed = false;
         activate = false;
-        reloadTab = 1;
         timerCount(tab, showCounter);
     }
 }
@@ -201,7 +200,7 @@ function startTimer(tab) {
                         for (let i = 0; i <= verifyTab.length; i++) {
                             if(verifyTab[i] == verifyTabID){
                                     canReload = 0;
-                                    console.log(">> Tab saved ", verifyTab[i], " current tab id ", verifyTabID);
+                                    // console.log(">> Tab saved ", verifyTab[i], " current tab id ", verifyTabID);
                             }
                         }
                     }
@@ -213,15 +212,15 @@ function startTimer(tab) {
                             if(tabsClicked.length > 0){
                                 for(let i = 0; i <= tabsClicked.length; i++){
                                     for(let j = 0; j <= tabsVisited.length; j++){
-                                        console.log("Clicked ", tabsClicked[i], " ==  Visited ", tabsVisited[j]);
+                                        // console.log("Clicked ", tabsClicked[i], " ==  Visited ", tabsVisited[j]);
                                         if(tabsClicked[i] == tabsVisited[j]){
                                             existTabInArray = true;
-                                            console.log(tabsClicked[i]," == ", tabsVisited[j]);
+                                            // console.log(tabsClicked[i]," == ", tabsVisited[j]);
                                         }
                                     }
                                 }
                                 if(existTabInArray == true){
-                                    console.log("(Reload) The tab exist in the Array ", tab.id);
+                                    // console.log("(Reload) The tab exist in the Array ", tab.id);
                                     browser.tabs.reload(tab.id, {'bypassCache': true});
                                     reloadTab = 0;
                                     browser.browserAction.setIcon({path: iconActive});
@@ -231,12 +230,12 @@ function startTimer(tab) {
                                     });
                                     changeHoverText(tab, reloadMinutes);
                                 } else {
-                                    console.log("(Not Reload) The tab doesn't exist in Array");
+                                    // console.log("(Not Reload) The tab doesn't exist in Array");
                                     reloadTab = 0;
                                     changeHoverText(tab, reloadMinutes);
                                 }
                             } else {
-                                console.log("(Not Reload) In the tab ", tab.id);
+                                // console.log("(Not Reload) In the tab ", tab.id);
                                 reloadTab = 0;
                                 browser.browserAction.setIcon({path: iconInactive});
                                 browser.browserAction.setTitle({
@@ -247,7 +246,7 @@ function startTimer(tab) {
                             }
                         
                     } else {
-                        console.log("(Not Reload) Can't reload the tab because is in use ", tab.id);
+                        // console.log("(Not Reload) Can't reload the tab because is in use ", tab.id);
                         reloadTab = 0;
                         browser.browserAction.setIcon({path: iconInactive});
                         browser.browserAction.setTitle({
@@ -257,7 +256,7 @@ function startTimer(tab) {
                         changeHoverText(tab, reloadMinutes);
                     }
                 }else {
-                    console.log("(Reload) Can reload any tab", tab.id);
+                    // console.log("(Reload) Can reload any tab", tab.id);
                     reloadTab = 0;
                     browser.tabs.reload(tab.id, {'bypassCache': true});
                     browser.browserAction.setIcon({path: iconActive});
@@ -421,8 +420,8 @@ function verifyPage(tab) {
 
         tabOpened = localStorage.getItem("tabsStored");
 
-        console.log("Tabs clicked to reload ", verifyTab);
-        console.log("All open tabs already captured ", tabOpened);
+        // console.log("Tabs clicked to reload ", verifyTab);
+        // console.log("All open tabs already captured ", tabOpened);
 
         // verify if is checked to reload
         let reloadNotActivated = false;

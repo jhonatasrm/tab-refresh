@@ -24,12 +24,6 @@ let timerMinute = browser.i18n.getMessage("min1");
 contextMenuFunction();
 updatePageFunction();
 
-// tabs
-let verifyTab = [];
-let storedTabs = localStorage.getItem("verifyTab");
-verifyTab = storedTabs ? JSON.parse(storedTabs) : [];
-let tabOpened = [];
-
 if (localStorage.getItem("timer") == null) {
     reloadMinutes = 3;
     localStorage.setItem("timer", 3);
@@ -100,7 +94,6 @@ function changeHoverText(tab, reloadMinutes) {
             'path': iconActive,
             'tabId': tab.id
         });
-
         alreadyAccessed = true;
         activate = true;
         reloadTab = 0;
@@ -110,7 +103,6 @@ function changeHoverText(tab, reloadMinutes) {
             'path': iconInactive,
             'tabId': tab.id
         });
-
         if (reloadMinutes == 1) {
             browser.browserAction.setTitle({
                 'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
@@ -186,18 +178,22 @@ function startTimer(tab) {
                 'tabId': tab.id
             });
         }
+        alreadyAccessed = false;
         activate = true;
         reloadTab = 0;
         return;
     } else {
-        verifyTab.push(verifyTabID);
-        localStorage.setItem("verifyTab", JSON.stringify(verifyTab));
+        let addTabClicked = new Array().fill(0);
+        addTabClicked.push(verifyTabID);
+        localStorage.setItem("verifyTab", JSON.stringify(addTabClicked));
+        alreadyAccessed = true;
     }
 
     changeHoverText(tab, reloadMinutes);
 
         reloadTab = setInterval(function() {
             updatePageFunction();
+            verifyTab = JSON.parse(localStorage.getItem("verifyTab"));
             if (activate == true) {
                 let canReload = 1;
                 if (updatePage == true){
@@ -205,7 +201,7 @@ function startTimer(tab) {
                         for (let i = 0; i <= verifyTab.length; i++) {
                             if(verifyTab[i] == verifyTabID){
                                     canReload = 0;
-                                    // console.log(">> Tab saved ", verifyTab[i], " current tab id ", verifyTabID);
+                                    console.log(">> Tab saved ", verifyTab[i], " current tab id ", verifyTabID);
                             }
                         }
                     }
@@ -217,16 +213,17 @@ function startTimer(tab) {
                             if(tabsClicked.length > 0){
                                 for(let i = 0; i <= tabsClicked.length; i++){
                                     for(let j = 0; j <= tabsVisited.length; j++){
-                                        // console.log("Clicked ", tabsClicked[i], " ==  Visited ", tabsVisited[j]);
-                                        if(tabsClicked[i] === tabsVisited[j]){
+                                        console.log("Clicked ", tabsClicked[i], " ==  Visited ", tabsVisited[j]);
+                                        if(tabsClicked[i] == tabsVisited[j]){
                                             existTabInArray = true;
+                                            console.log(tabsClicked[i]," == ", tabsVisited[j]);
                                         }
                                     }
                                 }
                                 if(existTabInArray == true){
                                     console.log("(Reload) The tab exist in the Array ", tab.id);
-                                    reloadTab = 0;
                                     browser.tabs.reload(tab.id, {'bypassCache': true});
+                                    reloadTab = 0;
                                     browser.browserAction.setIcon({path: iconActive});
                                     browser.browserAction.setTitle({
                                         'title': timerUpdate + date,
@@ -275,7 +272,16 @@ function startTimer(tab) {
 }
 
 function verifyPage(tab) {
+    // tabs
+    var tabOpened = new Array().fill(0); // when open a new tab
+    var verifyTab = new Array().fill(0); // when click at Add-on
 
+    var storedTabs = localStorage.getItem("verifyTab");
+    verifyTab = storedTabs ? JSON.parse(storedTabs) : [];
+
+    var tabOpenedS = localStorage.getItem("tabsStored");
+    tabOpened = tabOpenedS ? JSON.parse(tabOpenedS) : [];
+    
     browser.tabs.query({
             active: true,
             windowId: browser.windows.WINDOW_ID_CURRENT
@@ -386,12 +392,12 @@ function verifyPage(tab) {
             }
         });
         
-         // tabs opened
+        // tabs opened
         var tabsStored = localStorage.getItem("tabsStored");
         tabOpened = tabsStored ? JSON.parse(tabsStored) : [];
-        
         let alreadyExist = false;
-        let removeAlreadyExist = JSON.parse(localStorage.getItem("tabsStored"));;
+        let removeAlreadyExist = new Array().fill(0);
+        removeAlreadyExist = JSON.parse(localStorage.getItem("tabsStored"));;
         if(tabOpened.length != 0){
             for(let r = 0; r <= tabOpened.length; r++){
                 if(tabOpened[r] == verifyTabID){
@@ -412,37 +418,54 @@ function verifyPage(tab) {
             tabOpened.push(verifyTabID);
             localStorage.setItem("tabsStored", JSON.stringify(tabOpened));
         }
+
         tabOpened = localStorage.getItem("tabsStored");
-        // console.log("Tabs clicked to reload ", verifyTab);
-        // console.log("All open tabs already captured ", tabOpened);
+
+        console.log("Tabs clicked to reload ", verifyTab);
+        console.log("All open tabs already captured ", tabOpened);
 
         // verify if is checked to reload
         let reloadNotActivated = false;
-        if(verifyTab.length > 0){
+        if(verifyTab.length > 0 && verifyTab != "undefined" && verifyTab != null){
             for (let i = 0; i <= verifyTab.length; i++) {
                 if(verifyTab[i] == verifyTabID){
                     reloadNotActivated = true;
                 }
             }
         }
-        if(reloadNotActivated == false){
-            // console.log("Add-on not activated");
-            if (reloadMinutes == 1) {
+
+        if(reloadNotActivated != false){
+            if (reloadTab == 1) {
                 browser.browserAction.setTitle({
-                    'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
+                    'title': timerUpdate + date,
                     'tabId': tab.id
                 });
+                browser.browserAction.setIcon({
+                    'path': iconActive,
+                    'tabId': tab.id
+                });
+                alreadyAccessed = true;
+                activate = true;
+                reloadTab = 0;
+                timerCount(tab, showCounter);
             } else {
-                browser.browserAction.setTitle({
-                    'title': timerUpdateEveryXmin + reloadMinutes + timerMinutes,
+                browser.browserAction.setIcon({
+                    'path': iconInactive,
                     'tabId': tab.id
                 });
-            }
-    
-            alreadyAccessed = false;
-            activate = true;
-            reloadTab = 0;
+                if (reloadMinutes == 1) {
+                    browser.browserAction.setTitle({
+                        'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
+                        'tabId': tab.id
+                    });
+                } else {
+                    browser.browserAction.setTitle({
+                        'title': timerUpdateEveryXmin + reloadMinutes + timerMinutes,
+                        'tabId': tab.id
+                    });
+                }
         }
+    }
 }
 
 function onCreated() {
@@ -587,16 +610,33 @@ function verify(tab){
 // remove tab closed from the array
 function handleRemovedTab(tabId) {
     // console.log("Tab: " + tabId + " is closing");
-    let removeFromArray = JSON.parse(localStorage.getItem("verifyTab"));
-    if(removeFromArray > 0){
+    let removeFromArray = new Array().fill(0);
+    var storedTabsArray = localStorage.getItem("verifyTab");
+    removeFromArray = storedTabsArray ? JSON.parse(storedTabsArray) : [];
+
+    let removeFromArrayOpened = new Array().fill(0);
+    let storedTabsArrayOpened = localStorage.getItem("tabsStored");
+    removeFromArrayOpened = storedTabsArrayOpened ? JSON.parse(storedTabsArrayOpened) : [];
+
+    // removes the tab id when was clicked at Add-on icon 
+    if(removeFromArray.length > 0){
         for (let i = 0; i <= removeFromArray.length; i++) {
-            if(removeFromArray[i] === tabId){
+            if(removeFromArray[i] == tabId){
                 removeFromArray.splice(i, 1);
                 localStorage.setItem("verifyTab", JSON.stringify(removeFromArray));
             }
         }
-    }else {
-        // console.log("The Array is empty");
     }
     verifyTab = localStorage.getItem("verifyTab");
+
+    // removes the tab id opened 
+    if(removeFromArrayOpened.length > 0){
+        for(let j = 0; j <= removeFromArrayOpened.length; j++) {
+            if(removeFromArrayOpened[j] == tabId){
+                removeFromArrayOpened.splice(j, 1);
+                localStorage.setItem("tabsStored", JSON.stringify(removeFromArrayOpened));
+            }
+        }
+    }
+    tabOpened = localStorage.getItem("tabsStored");
 }

@@ -1,0 +1,70 @@
+{
+    "extensionName": {
+      "message": "Tab Refresh",
+      "description": "Extension name."
+    },
+    "extensionDescription": {
+      "message": "Select a tab to refresh every x minutes (you can set in the preferences, the default is 3 minutes), thus preventing the timeout on the page you are connected to."
+    },
+    "message_timer": {
+      "message":"Will refresh the page at\n ",
+      "description": "Will refresh the page at\n "
+    },
+    "message_timer_min": {
+      "message": "Refresh this page every "
+    },
+    "min": {
+      "message": " minutes"
+    },
+    "min1": {
+      "message": " minute"
+    },
+    "about_title": {
+      "message": "About"
+    },
+    "preferences": {
+      "message": "Preferences"
+    },
+    "about": {
+      "message": "About Tab Refresh"
+    },
+    "note": {
+      "message": "Note: This Add-on is completely free! Please consider making a small donation or write an review at addons.mozilla.org. Thank you!"
+    },
+    "works": {
+      "message": "Using this Add-on you can set the time in minutes for the refresh page, it is possible to do this by adjusting in the preferences going in about:addons or by clicking on the gear in the top right corner. It works by refreshing the page every x minutes so that you don't be disconnected in the login timeout. This Add-on will have more updates that will add new features, as requested in the reviews. Currently has the following features:"
+    },
+    "aboutItem1": {
+      "message": "1. Set time to refresh tab in Add-on preferences"
+    },
+    "aboutItem2": {
+      "message": "2. Context menu"
+    },
+    "aboutItem3": {
+      "message": "3. Does not refresh the page you are using"
+    },
+    "bugs": {
+      "message": "If you find any bugs, have any suggestions or some ideas for this Add-on: Please create a new issue."
+    },
+    "counter": {
+      "message": "Show countdown"
+    },
+    "contextMenu": {
+      "message": "Context menu"
+    },
+    "timer": {
+      "message": "Time to refresh the page (minutes)"
+    },
+    "update_page": {
+      "message": "Do not refresh the tab if you are using"
+    },
+    "description_update_page": {
+      "message": "Do not refresh the tab if it is being used"
+    },
+    "description_contextmenu": {
+      "message": "Allow or not the Context menu"
+    },
+    "description_timer": {
+      "message": "Sets the time to refresh the page"
+    }
+  }

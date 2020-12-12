@@ -4,67 +4,67 @@
       "description": "Extension name."
     },
     "extensionDescription": {
-      "message": "Select a tab to refresh every x minutes (you can set in the preferences, the default is 3 minutes), thus preventing the timeout on the page you are connected to."
+      "message": "Seleccione una pestaña para actualizar cada x minutos (puede establecer en las preferencias, el valor predeterminado es 3 minutos), evitando así el tiempo de espera en la página a la que está conectado."
     },
     "message_timer": {
-      "message":"Will refresh the page at\n ",
+      "message":"Actualizará la página en\n ",
       "description": "Will refresh the page at\n "
     },
     "message_timer_min": {
-      "message": "Refresh this page every "
+      "message": "Actualice esta página cada "
     },
     "min": {
-      "message": " minutes"
+      "message": " minutos"
     },
     "min1": {
-      "message": " minute"
+      "message": " minuto"
     },
     "about_title": {
-      "message": "About"
+      "message": "Acerca"
     },
     "preferences": {
-      "message": "Preferences"
+      "message": "Preferencias"
     },
     "about": {
-      "message": "About Tab Refresh"
+      "message": "Acerca de Tab Refresh"
     },
     "note": {
-      "message": "Note: This Add-on is completely free! Please consider making a small donation or write an review at addons.mozilla.org. Thank you!"
+      "message": "Nota: ¡Este complemento es completamente gratuito! Por favor considere hacer una pequeña donación o escribir una opinión en addons.mozilla.org. ¡Gracias!"
     },
     "works": {
-      "message": "Using this Add-on you can set the time in minutes for the refresh page, it is possible to do this by adjusting in the preferences going in about:addons or by clicking on the gear in the top right corner. It works by refreshing the page every x minutes so that you don't be disconnected in the login timeout. This Add-on will have more updates that will add new features, as requested in the reviews. Currently has the following features:"
+      "message": "Usando este complemento puede establecer el tiempo en minutos para la página de actualización, es posible hacer esto ajustando en las preferencias que van en about:addons o haciendo clic en el engranaje en la esquina superior derecha. Funciona actualizando la página cada x minutos para que no se desconecte en el tiempo de espera de inicio de sesión. Este complemento tendrá más actualizaciones que agregarán nuevas características, como se solicita en las revisiones. Actualmente tiene las siguientes características:"
     },
     "aboutItem1": {
-      "message": "1. Set time to refresh tab in Add-on preferences"
+      "message": "1. Establezca el tiempo para actualizar la pestaña en las preferencias del complemento"
     },
     "aboutItem2": {
-      "message": "2. Context menu"
+      "message": "2. Menú contextual"
     },
     "aboutItem3": {
-      "message": "3. Does not refresh the page you are using"
+      "message": "3. No actualiza la página que está utilizando"
     },
     "bugs": {
-      "message": "If you find any bugs, have any suggestions or some ideas for this Add-on: Please create a new issue."
+      "message": "Si encuentra algún error, tenga alguna sugerencia o algunas ideas para este complemento: Por favor, cree un nuevo problema."
     },
     "counter": {
-      "message": "Show countdown"
+      "message": "Mostrar cuenta regresiva"
     },
     "contextMenu": {
-      "message": "Context menu"
+      "message": "Menú contextual"
     },
     "timer": {
-      "message": "Time to refresh the page (minutes)"
+      "message": "Tiempo para actualizar la página (minutos)"
     },
     "update_page": {
-      "message": "Do not refresh the tab if you are using"
+      "message": "No actualice la pestaña si está utilizando"
     },
     "description_update_page": {
-      "message": "Do not refresh the tab if it is being used"
+      "message": "No actualice la pestaña si se está utilizando"
     },
     "description_contextmenu": {
-      "message": "Allow or not the Context menu"
+      "message": "Permitir o no el menú contextual"
     },
     "description_timer": {
-      "message": "Sets the time to refresh the page"
+      "message": "Establece el tiempo para actualizar la página"
     }
   }

@@ -1,70 +1,70 @@
 {
-    "extensionName": {
-      "message": "Tab Refresh",
-      "description": "Extension name."
-    },
-    "extensionDescription": {
-      "message": "Seleccione una pestaña para actualizar cada x minutos (puede establecer en las preferencias, el valor predeterminado es 3 minutos), evitando así el tiempo de espera en la página a la que está conectado."
-    },
-    "message_timer": {
-      "message":"Actualizará la página en\n ",
-      "description": "Will refresh the page at\n "
-    },
-    "message_timer_min": {
-      "message": "Actualice esta página cada "
-    },
-    "min": {
-      "message": " minutos"
-    },
-    "min1": {
-      "message": " minuto"
-    },
-    "about_title": {
-      "message": "Acerca"
-    },
-    "preferences": {
-      "message": "Preferencias"
-    },
-    "about": {
-      "message": "Acerca de Tab Refresh"
-    },
-    "note": {
-      "message": "Nota: ¡Este complemento es completamente gratuito! Por favor considere hacer una pequeña donación o escribir una opinión en addons.mozilla.org. ¡Gracias!"
-    },
-    "works": {
-      "message": "Usando este complemento puede establecer el tiempo en minutos para la página de actualización, es posible hacer esto ajustando en las preferencias que van en about:addons o haciendo clic en el engranaje en la esquina superior derecha. Funciona actualizando la página cada x minutos para que no se desconecte en el tiempo de espera de inicio de sesión. Este complemento tendrá más actualizaciones que agregarán nuevas características, como se solicita en las revisiones. Actualmente tiene las siguientes características:"
-    },
-    "aboutItem1": {
-      "message": "1. Establezca el tiempo para actualizar la pestaña en las preferencias del complemento"
-    },
-    "aboutItem2": {
-      "message": "2. Menú contextual"
-    },
-    "aboutItem3": {
-      "message": "3. No actualiza la página que está utilizando"
-    },
-    "bugs": {
-      "message": "Si encuentra algún error, tenga alguna sugerencia o algunas ideas para este complemento: Por favor, cree un nuevo problema."
-    },
-    "counter": {
-      "message": "Mostrar cuenta regresiva"
-    },
-    "contextMenu": {
-      "message": "Menú contextual"
-    },
-    "timer": {
-      "message": "Tiempo para actualizar la página (minutos)"
-    },
-    "update_page": {
-      "message": "No actualice la pestaña si está utilizando"
-    },
-    "description_update_page": {
-      "message": "No actualice la pestaña si se está utilizando"
-    },
-    "description_contextmenu": {
-      "message": "Permitir o no el menú contextual"
-    },
-    "description_timer": {
-      "message": "Establece el tiempo para actualizar la página"
-    }
+  "extensionName": {
+    "message": "Tab Refresh",
+    "description": "Nombre de extensión."
+  },
+  "extensionDescription": {
+    "message": "Seleccione una pestaña para actualizar cada x minutos (puede establecer en las preferencias, el valor predeterminado es 3 minutos), evitando así el tiempo de espera en la página a la que está conectado."
+  },
+  "message_timer": {
+    "message":"Actualizará la página en\n ",
+    "description": "Actualizará la página en\n "
+  },
+  "message_timer_min": {
+    "message": "actualizar esta página cada "
+  },
+  "min": {
+    "message": " minutos"
+  },
+  "min1": {
+    "message": " minuto"
+  },
+  "about_title": {
+    "message": "Sobre"
+  },
+  "preferences": {
+    "message": "Preferencias"
+  },
+  "about": {
+    "message": "Sobre Tab Refresh"
+  },
+  "note": {
+    "message": "Nota: ¡Este complemento es completamente gratuito! Por favor considere hacer una pequeña donación o escribir una reseña en addons.mozilla.org. ¡Gracias!"
+  },
+  "works": {
+    "message": "Con este complemento puede establecer el tiempo en minutos para la página de actualización, es posible hacerlo ajustando en las preferencias que van en about:addons o haciendo clic en el engranaje en la esquina superior derecha. Funciona actualizando la página cada x minutos para que no se desconecte en el tiempo de espera de inicio de sesión. Este complemento tendrá más actualizaciones que agregarán nuevas características, tal como se solicita en las revisiones. Actualmente tiene las siguientes características:"
+  },
+  "aboutItem1": {
+    "message": "1. Establezca el tiempo para actualizar la pestaña en las preferencias del complemento"
+  },
+  "aboutItem2": {
+    "message": "2. Menú contextual"
+  },
+  "aboutItem3": {
+    "message": "3. No actualiza la página que está utilizando"
+  },
+  "bugs": {
+    "message": "Si encuentra algún error, tenga alguna sugerencia o algunas ideas para este complemento: Por favor, cree un nuevo problema."
+  },
+  "counter": {
+    "message": "Mostrar cuenta regresiva"
+  },
+  "contextMenu": {
+    "message": "Menú contextual"
+  },
+  "timer": {
+    "message": "Tiempo para actualizar la página (minutos)"
+  },
+  "update_page": {
+    "message": "No actualice la pestaña si está utilizando"
+  },
+  "description_update_page": {
+    "message": "No actualice la pestaña si se está utilizando"
+  },
+  "description_contextmenu": {
+    "message": "Permitir o no el menú contextual"
+  },
+  "description_timer": {
+    "message": "Establece el tiempo para actualizar la página"
   }
+}

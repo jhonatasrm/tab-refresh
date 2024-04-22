@@ -1,15 +1,16 @@
 let reloadTab = 0;
 let sec;
 let alreadyAccessed = false;
-let getTabId;
 let date;
 let refreshTab;
 let activate;
 let verifyState = true;
 let reloadMinutes;
-let verifyTabID;
 let showCounter = true;
 let secValueRecover;
+var updatePage;
+var getTabId;
+var verifyTabID;
 let iconActive = "../res/icons/refresh_tab_on_32.png";
 let iconInactive = "../res/icons/refresh_tab_32.png";
 let iconLocalOff = "../res/icons/refresh_tab_off_32.png";
@@ -46,10 +47,27 @@ if (localStorage.getItem("timer") == null) {
 browser.tabs.onRemoved.addListener(handleRemovedTab);
 
 // start
-browser.browserAction.onClicked.addListener(startTimer);
+browser.browserAction.onClicked.addListener(function(tab) {
+    startTimer(tab);
+});
 
 // onUpdate Tab
 browser.tabs.onUpdated.addListener(verifyPage);
+
+browser.tabs.onActivated.addListener(handleTabActivated);
+
+// Define the function to handle tab activation
+function handleTabActivated(activeInfo) {
+    // Get the tab information
+    browser.tabs.get(activeInfo.tabId)
+        .then(tab => {
+            // Call verifyPage function for the activated tab
+            verifyPage(tab);
+        })
+        .catch(error => {
+            console.error('Error retrieving tab information:', error);
+        });
+}
 
 // setup badge background color
 browser.browserAction.setBadgeBackgroundColor({
@@ -157,14 +175,14 @@ function startTimer(tab) {
         // remove tab.id from array
         let removeFromArray = JSON.parse(localStorage.getItem("verifyTab"));
 
-        if(removeFromArray != null && removeFromArray != "undefined" && removeFromArray > 0){
-            for (let i = 0; i <= removeFromArray.length; i++) {
-                if(removeFromArray[i] === tab.id){
+        if (removeFromArray && removeFromArray.length > 0) {
+            for (let i = 0; i < removeFromArray.length; i++) {
+                if (removeFromArray[i] === tab.id) {
                     removeFromArray.splice(i, 1);
                     localStorage.setItem("verifyTab", JSON.stringify(removeFromArray));
+                    break; // Exit the loop once the tab ID is removed
                 }
             }
-            verifyTab = removeFromArray;
         }
         if (reloadMinutes == 1) { 
             browser.browserAction.setTitle({
@@ -182,290 +200,172 @@ function startTimer(tab) {
         reloadTab = 0;
         return;
     } else {
-        let addTabClicked = new Array().fill(0);
-        addTabClicked.push(verifyTabID);
+        var addTabClicked = JSON.parse(localStorage.getItem("verifyTab"));
+        // Check if addTabClicked is null or undefined
+        if (addTabClicked === null || typeof addTabClicked === 'undefined') {
+            // If it's null or undefined, initialize it as an empty array
+            addTabClicked = [];
+        }
+
+        // Check if the tab ID already exists in the array
+        if (!addTabClicked.includes(tab.id)) {
+            // If the tab ID doesn't exist, push it into the array
+            addTabClicked.push(tab.id);
+        }
+
+        // Save the updated array back to localStorage
         localStorage.setItem("verifyTab", JSON.stringify(addTabClicked));
+
+        // Set alreadyAccessed to true
         alreadyAccessed = true;
     }
 
     changeHoverText(tab, reloadMinutes);
 
-        reloadTab = setInterval(function() {
-            updatePageFunction();
-            verifyTab = JSON.parse(localStorage.getItem("verifyTab"));
-            if (activate == true) {
-                let canReload = 1;
-                if (updatePage == true){
-                    if(verifyTab.length > 0){
-                        for (let i = 0; i <= verifyTab.length; i++) {
-                            if(verifyTab[i] == verifyTabID){
-                                    canReload = 0;
-                                    // console.log(">> Tab saved ", verifyTab[i], " current tab id ", verifyTabID);
-                            }
+    reloadTab = setInterval(function() {
+        updatePageFunction();
+        verifyTab = JSON.parse(localStorage.getItem("verifyTab"));
+        if (activate == true) {
+            let canReload = 1;
+            if (updatePage == true){
+                if(verifyTab.length > 0){
+                    for (let i = 0; i <= verifyTab.length; i++) {
+                        if(verifyTab[i] == verifyTabID){
+                                canReload = 0;
                         }
                     }
-                    
-                    if (canReload == 1) {
-                            let existTabInArray = false;
-                            let tabsClicked = JSON.parse(localStorage.getItem("verifyTab"));
-                            let tabsVisited = JSON.parse(localStorage.getItem("tabsStored"));
-                            if(tabsClicked.length > 0){
-                                for(let i = 0; i <= tabsClicked.length; i++){
-                                    for(let j = 0; j <= tabsVisited.length; j++){
-                                        // console.log("Clicked ", tabsClicked[i], " ==  Visited ", tabsVisited[j]);
-                                        if(tabsClicked[i] == tabsVisited[j]){
-                                            existTabInArray = true;
-                                            // console.log(tabsClicked[i]," == ", tabsVisited[j]);
-                                        }
+                }
+                
+                if (canReload == 1) {
+                        let existTabInArray = false;
+                        let tabsClicked = JSON.parse(localStorage.getItem("verifyTab"));
+                        let tabsVisited = JSON.parse(localStorage.getItem("tabsStored"));
+                        if(tabsClicked.length > 0){
+                            for(let i = 0; i <= tabsClicked.length; i++){
+                                for(let j = 0; j <= tabsVisited.length; j++){
+                                    if(tabsClicked[i] == tabsVisited[j]){
+                                        existTabInArray = true;
                                     }
                                 }
-                                if(existTabInArray == true){
-                                    // console.log("(Reload) The tab exist in the Array ", tab.id);
-                                    browser.tabs.reload(tab.id, {'bypassCache': true});
-                                    reloadTab = 0;
-                                    browser.browserAction.setIcon({path: iconActive});
-                                    browser.browserAction.setTitle({
-                                        'title': timerUpdate + date,
-                                        'tabId': tab.id
-                                    });
-                                    changeHoverText(tab, reloadMinutes);
-                                } else {
-                                    // console.log("(Not Reload) The tab doesn't exist in Array");
-                                    reloadTab = 0;
-                                    changeHoverText(tab, reloadMinutes);
-                                }
-                            } else {
-                                // console.log("(Not Reload) In the tab ", tab.id);
+                            }
+                            if(existTabInArray == true){
+                                browser.tabs.reload(tab.id, {'bypassCache': true});
                                 reloadTab = 0;
-                                browser.browserAction.setIcon({path: iconInactive});
+                                browser.browserAction.setIcon({path: iconActive});
                                 browser.browserAction.setTitle({
                                     'title': timerUpdate + date,
                                     'tabId': tab.id
                                 });
                                 changeHoverText(tab, reloadMinutes);
+                            } else {
+                                reloadTab = 0;
+                                changeHoverText(tab, reloadMinutes);
                             }
-                        
-                    } else {
-                        // console.log("(Not Reload) Can't reload the tab because is in use ", tab.id);
-                        reloadTab = 0;
-                        browser.browserAction.setIcon({path: iconInactive});
-                        browser.browserAction.setTitle({
-                            'title': timerUpdate + date,
-                            'tabId': tab.id
-                        });
-                        changeHoverText(tab, reloadMinutes);
-                    }
-                }else {
-                    // console.log("(Reload) Can reload any tab", tab.id);
+                        } else {
+                            reloadTab = 0;
+                            browser.browserAction.setIcon({path: iconInactive});
+                            browser.browserAction.setTitle({
+                                'title': timerUpdate + date,
+                                'tabId': tab.id
+                            });
+                            changeHoverText(tab, reloadMinutes);
+                        }
+                    
+                } else {
                     reloadTab = 0;
-                    browser.tabs.reload(tab.id, {'bypassCache': true});
-                    browser.browserAction.setIcon({path: iconActive});
+                    browser.browserAction.setIcon({path: iconInactive});
                     browser.browserAction.setTitle({
                         'title': timerUpdate + date,
                         'tabId': tab.id
                     });
                     changeHoverText(tab, reloadMinutes);
                 }
+            }else {
+                reloadTab = 0;
+                browser.tabs.reload(tab.id, {'bypassCache': true});
+                browser.browserAction.setIcon({path: iconActive});
+                browser.browserAction.setTitle({
+                    'title': timerUpdate + date,
+                    'tabId': tab.id
+                });
+                changeHoverText(tab, reloadMinutes);
             }
-        }, reloadMinutes * 60 * 1000);
+        }
+    }, reloadMinutes * 60 * 1000);
 }
 
 function verifyPage(tab) {
-    // tabs
-    var tabOpened = new Array().fill(0); // when open a new tab
-    var verifyTab = new Array().fill(0); // when click at Add-on
+    let verifyTabID;
+    let alreadyAccessed = false;
+    let getTabId = tab.id;
+    let reloadMinutes = localStorage.getItem("timer") || 3;
+    let iconActive = "../res/icons/refresh_tab_on_32.png";
+    let iconInactive = "../res/icons/refresh_tab_32.png";
+    let iconLocalOff = "../res/icons/refresh_tab_off_32.png";
+    let timerUpdate = browser.i18n.getMessage("message_timer");
+    let timerUpdateEveryXmin = browser.i18n.getMessage("message_timer_min");
+    let timerMinutes = browser.i18n.getMessage("min");
+    let timerMinute = browser.i18n.getMessage("min1");
 
-    var storedTabs = localStorage.getItem("verifyTab");
-    verifyTab = storedTabs ? JSON.parse(storedTabs) : [];
+    let storedTabs = localStorage.getItem("verifyTab");
+    let verifyTab = storedTabs ? JSON.parse(storedTabs) : [];
 
-    var tabOpenedS = localStorage.getItem("tabsStored");
-    tabOpened = tabOpenedS ? JSON.parse(tabOpenedS) : [];
-    
     browser.tabs.query({
             active: true,
             windowId: browser.windows.WINDOW_ID_CURRENT
         })
         .then(tabs => browser.tabs.get(tabs[0].id))
-        .then(tab => {
-            verifyTabID = tab.id;
-            // console.log(verifyTabID);
-            if (tab.url == "about:preferences") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:config") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:addons") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:debugging") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:support") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:newtab") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:buildconfig") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:cache") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:checkerboard") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:crashes") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:credits") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:devtools") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:downloads") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:home") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:memory") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:mozilla") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:sessionrestore") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (tab.url == "about:plugins") {
-                browser.browserAction.setIcon({
-                    path: iconLocalOff
-                });
-            } else if (alreadyAccessed == true && getTabId == tab.id) {
+        .then(currentTab => {
+            verifyTabID = currentTab.id;
+            if (verifyTab.includes(verifyTabID)) {
                 browser.browserAction.setIcon({
                     path: iconActive
                 });
                 browser.browserAction.setTitle({
-                    'title': timerUpdate + date,
+                    'title': timerUpdate + " " + getReloadTime(reloadMinutes),
                     'tabId': tab.id
                 });
-            } else if (alreadyAccessed == false && getTabId == tab.id) {
-                browser.browserAction.setIcon({
-                    path: iconInactive
-                });
-                if (reloadMinutes == 1) {
-                    browser.browserAction.setTitle({
-                        'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
-                        'tabId': tab.id
-                    });
-                } else {
-                    browser.browserAction.setTitle({
-                        'title': timerUpdateEveryXmin + reloadMinutes + timerMinutes,
-                        'tabId': tab.id
-                    });
-                }
             } else {
                 browser.browserAction.setIcon({
                     path: iconInactive
                 });
             }
+        })
+        .catch(error => {
+            console.error('Error retrieving tab information:', error);
         });
-        
-        // tabs opened
-        var tabsStored = localStorage.getItem("tabsStored");
-        tabOpened = tabsStored ? JSON.parse(tabsStored) : [];
-        let alreadyExist = false;
-        let removeAlreadyExist = new Array().fill(0);
-        removeAlreadyExist = JSON.parse(localStorage.getItem("tabsStored"));;
-        if(tabOpened.length != 0){
-            for(let r = 0; r <= tabOpened.length; r++){
-                if(tabOpened[r] == verifyTabID){
-                    alreadyExist = true;
-                }
-                
-                if(removeAlreadyExist[r] == "undefined" || removeAlreadyExist[r] == null){
-                    removeAlreadyExist.splice(r, 1);
-                    localStorage.setItem("tabsStored", JSON.stringify(removeAlreadyExist));
-                }
-            }
-        }else {
-            tabOpened.push(verifyTabID);
-            localStorage.setItem("tabsStored", JSON.stringify(tabOpened));
-        }
-    
-        if(alreadyExist == false){
-            tabOpened.push(verifyTabID);
-            localStorage.setItem("tabsStored", JSON.stringify(tabOpened));
+
+    function getReloadTime(minutes) {
+        let currentDate = new Date();
+        let hours = currentDate.getHours();
+        let secs = currentDate.getSeconds();
+        let newMinutes = currentDate.getMinutes() + parseInt(minutes);
+
+        if (newMinutes > 59) {
+            hours = hours + 1;
+            newMinutes = newMinutes - 60;
         }
 
-        tabOpened = localStorage.getItem("tabsStored");
-
-        // console.log("Tabs clicked to reload ", verifyTab);
-        // console.log("All open tabs already captured ", tabOpened);
-
-        // verify if is checked to reload
-        let reloadNotActivated = false;
-        if(verifyTab.length > 0 && verifyTab != "undefined" && verifyTab != null){
-            for (let i = 0; i <= verifyTab.length; i++) {
-                if(verifyTab[i] == verifyTabID){
-                    reloadNotActivated = true;
-                }
-            }
+        if (newMinutes < 10) {
+            newMinutes = "0" + newMinutes;
         }
 
-        if(reloadNotActivated != false){
-            if (reloadTab == 1) {
-                browser.browserAction.setTitle({
-                    'title': timerUpdate + date,
-                    'tabId': tab.id
-                });
-                browser.browserAction.setIcon({
-                    'path': iconActive,
-                    'tabId': tab.id
-                });
-                alreadyAccessed = true;
-                activate = true;
-                reloadTab = 0;
-                timerCount(tab, showCounter);
-            } else {
-                browser.browserAction.setIcon({
-                    'path': iconInactive,
-                    'tabId': tab.id
-                });
-                if (reloadMinutes == 1) {
-                    browser.browserAction.setTitle({
-                        'title': timerUpdateEveryXmin + reloadMinutes + timerMinute,
-                        'tabId': tab.id
-                    });
-                } else {
-                    browser.browserAction.setTitle({
-                        'title': timerUpdateEveryXmin + reloadMinutes + timerMinutes,
-                        'tabId': tab.id
-                    });
-                }
+        if (hours > 23) {
+            hours = 0;
         }
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+
+        if (secs < 10) {
+            secs = "0" + secs;
+        }
+
+        return hours + ":" + newMinutes + ":" + secs;
     }
 }
+
 
 function onCreated() {
     if (browser.runtime.lastError) {
@@ -484,71 +384,14 @@ function contextMenuFunction() {
         }, onCreated);
 
         browser.menus.create({
-            id: "1",
-            title: "1 min",
-            contexts: ["all"],
+            id: "page-refresh",
+            title: "Page Refresh",
+            contexts: ["all"]
         }, onCreated);
-
-        browser.menus.create({
-            id: "2",
-            title: "2 min",
-            contexts: ["all"],
-        }, onCreated);
-
-        browser.menus.create({
-            id: "3",
-            title: "3 min",
-            contexts: ["all"],
-        }, onCreated);
-
-        browser.menus.create({
-            id: "5",
-            title: "5 min",
-            contexts: ["all"],
-        }, onCreated);
-
-        browser.menus.create({
-            id: "10",
-            title: "10 min",
-            contexts: ["all"],
-        }, onCreated);
-
     } else {
-        browser.menus.remove("tab-refresh");
-        browser.menus.remove("1");
-        browser.menus.remove("2");
-        browser.menus.remove("3");
-        browser.menus.remove("5");
-        browser.menus.remove("10");
+        browser.menus.removeAll();
     }
 }
-
-browser.menus.onClicked.addListener((info, tab) => {
-    switch (info.menuItemId) {
-        case "tab-refresh":
-            break;
-        case "1":
-            localStorage.setItem("timer", 1);
-            startTimer(tab);
-            break;
-        case "2":
-            localStorage.setItem("timer", 2);
-            startTimer(tab);
-            break;
-        case "3":
-            localStorage.setItem("timer", 3);
-            startTimer(tab);
-            break;
-        case "5":
-            localStorage.setItem("timer", 5);
-            startTimer(tab);
-            break;
-        case "10":
-            localStorage.setItem("timer", 10);
-            startTimer(tab);
-            break;
-    }
-});
 
 function timerCount(tab, showCounter) {
     getTabId = tab.id;
@@ -568,7 +411,7 @@ function timerCount(tab, showCounter) {
                     'tabId': tab.id
                 });
                 sec = sec - 1;
-                if (sec == 00) {
+                if (sec == 0) {
                     sec = secValueRecover;
                 }
             }, 1000);
@@ -591,51 +434,17 @@ function updatePageFunction(){
     }
 }
 
-function verify(tab){
-    browser.tabs.query({
-            active: true,
-            windowId: browser.windows.WINDOW_ID_CURRENT
-        })
-        .then(tabs => browser.tabs.get(tabs[0].id))
-        .then(tab => {
-            if(getTabId == tab.id){
-                verifyState = true;
-            }else {
-                verifyState = false;
-            }
-    });
-}
 
-// remove tab closed from the array
 function handleRemovedTab(tabId) {
-    // console.log("Tab: " + tabId + " is closing");
-    let removeFromArray = new Array().fill(0);
-    var storedTabsArray = localStorage.getItem("verifyTab");
-    removeFromArray = storedTabsArray ? JSON.parse(storedTabsArray) : [];
+    // Retrieve and parse the stored arrays
+    let removeFromArray = localStorage.getItem("verifyTab") ? JSON.parse(localStorage.getItem("verifyTab")) : [];
+    let removeFromArrayOpened = localStorage.getItem("tabsStored") ? JSON.parse(localStorage.getItem("tabsStored")) : [];
 
-    let removeFromArrayOpened = new Array().fill(0);
-    let storedTabsArrayOpened = localStorage.getItem("tabsStored");
-    removeFromArrayOpened = storedTabsArrayOpened ? JSON.parse(storedTabsArrayOpened) : [];
+    // Remove the tab ID from the array when clicked on the Add-on icon
+    removeFromArray = removeFromArray.filter(id => id !== tabId);
+    localStorage.setItem("verifyTab", JSON.stringify(removeFromArray));
 
-    // removes the tab id when was clicked at Add-on icon 
-    if(removeFromArray.length > 0){
-        for (let i = 0; i <= removeFromArray.length; i++) {
-            if(removeFromArray[i] == tabId){
-                removeFromArray.splice(i, 1);
-                localStorage.setItem("verifyTab", JSON.stringify(removeFromArray));
-            }
-        }
-    }
-    verifyTab = localStorage.getItem("verifyTab");
-
-    // removes the tab id opened 
-    if(removeFromArrayOpened.length > 0){
-        for(let j = 0; j <= removeFromArrayOpened.length; j++) {
-            if(removeFromArrayOpened[j] == tabId){
-                removeFromArrayOpened.splice(j, 1);
-                localStorage.setItem("tabsStored", JSON.stringify(removeFromArrayOpened));
-            }
-        }
-    }
-    tabOpened = localStorage.getItem("tabsStored");
+    // Remove the tab ID from the opened tabs array
+    removeFromArrayOpened = removeFromArrayOpened.filter(id => id !== tabId);
+    localStorage.setItem("tabsStored", JSON.stringify(removeFromArrayOpened));
 }
